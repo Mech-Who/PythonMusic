@@ -8,7 +8,6 @@ h = Beat.HALF # 1/8
 q = Beat.QUAR # 1/16
 
 notes_dict = {
-    "0": "rest",
     "1_": "c2_1",
     "2_": "c2_2",
     "3_": "c2_3",
@@ -32,27 +31,59 @@ notes_dict = {
     "_7": "c4_7",
 }
 
+
+def str2chord(mapping_dict, str_notes):
+    """
+    mapping_dict: {"your definition": "c1_1"}, every note will be used should be found in this dict. And the real note should be represent by 'cx_y', while 'x' means pitch, 'y' means name of the note in number.
+    str_notes: notes represent by str.
+    """
+    notes = str_notes.split()
+    chords = []
+    final_notes = []
+    for note in notes:
+        if note == "0":
+            if len(final_notes) > 0:
+                note_size = len(final_notes)
+                dura = [1/4]*note_size
+                chord = mp.chord(notes=final_notes, duration=dura, interval=dura)
+                chords.append(chord)
+                final_notes.clear()
+            chords.append(mp.rest(1/4))
+        else:
+            final_notes.append(eval(mapping_dict[note]))
+    return chords
+
+
 def fate():
+    music = [
+        "1,2,3,-,3,3,2,-",
+        "7.-1,1,2,5,7.-1,1,r,r",
+        "6.-1,7.-1,1,-,3,3,2,1",
+        "2,3,r,r,r,r,r,r",
+        "1,2,3,-,3,3,2,-",
+        "7.-1,1,2,5,7.-1,1,r,r",
+        "3,3,2,1,7.-1,1,-,-",
+        "r,r,r,r",
+        "1[.16;.],2[.8],3.,5[.4.],3,3,2,-",
+        "7.-1[.16;.],1[.8],2.,5[.4.],7.-1,7.-1,1 ,-",
+        "6.-1,7.-1,1,6.-1,3,3,2,1",
+        "2,3,-,-,r,r,r,r",
+        "1.1,7,5,-,2[.4.],1[.4.],-,-",
+        "1.1,7,5,-,2[.4.],1[.4.],-,-",
+        "2,2,1,2,2,1,1,-",
+        "-,-,-,-",
+        "1[.4.],2[.4.],3[.4.],5[.4.],6,r,r,6[.4.]",
+        "5#[.4.],r,r,5#[.4.],6,-,3.,2.",
+        "1.,-,r,r",
+        "1[.4.],3[.4.],5[.4.],6[.4.],r,r,,6[.4.],5[.4.],r,r,5[.2],6,-,1.1,-,6,-,5[.4],6[.4],r,r",
+        "6,-,1.1,-,7.,5,5[.4.],3[.16],6[.16],3,2,1[.16;.],1[.16],-,-",
+        "6,6,6,6[.16;.],1.1.,1.1[.8;.],7,7,7[.16;.],1.1,6,-,-,-"
+    ]
 
-    notes = "_1 7 5 5 2 1"
-    notes = str2note(notes_dict, notes)
-    duration = [h, h, h, h, h, f]
-    c1 = mp.chord(notes=notes, duration=duration, interval=duration)
-
-    notes = "3_ 2 1 3 2 1 1"
-    notes = str2note(notes_dict, notes)
-    duration = [h, h, h, h, h, h, h]
-    c2 = mp.chord(notes=notes, duration=duration, interval=duration)
-
-    notes = "3 1"
-    notes = str2note(notes_dict, notes)
-    duration = [f, f]
-    c3 = mp.chord(notes=notes, duration=duration, interval=duration)
-
-    final_piece = mp.rest(h) | c1 | mp.rest(h) | c2 | mp.rest(f+f) | c3
+    chord = mp.S("C major").get(",".join(music).replace(" ",""))
 
     return {
-        "name": "FATE.mid",
-        "current_chord": final_piece,
-        "bpm": 240
+        "name": "Fate.mid",
+        "current_chord": chord,
+        "bpm": 120
     }
