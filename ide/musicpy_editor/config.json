@@ -1,0 +1,61 @@
+{
+    "background_image": "",
+    "background_places": [
+        0,
+        0,
+        0,
+        0
+    ],
+    "pairing_symbols": [
+        "()",
+        "[]",
+        "''",
+        "\"\""
+    ],
+    "font_type": "Consolas",
+    "font_size": 9,
+    "editor_area_font_size": 12,
+    "background_mode": "white",
+    "syntax_highlight": {
+        "red": [
+            "/",
+            "@",
+            "\\^",
+            "\\~",
+            "\\%",
+            "\\&",
+            "\\|",
+            "\\+",
+            "-",
+            "?",
+            "\\*"
+        ],
+        "blue": [
+            "get_chord",
+            "chord",
+            "trans",
+            "C"
+        ],
+        "green": [
+            "toScale",
+            "scale",
+            "S"
+        ],
+        "orange": [
+            "toNote",
+            "note",
+            "N"
+        ],
+        "violet": [
+            "piece",
+            "build",
+            "P"
+        ]
+    },
+    "background_color": "white",
+    "foreground_color": "black",
+    "active_background_color": "lightgrey",
+    "button_background_color": "light grey",
+    "active_foreground_color": "black",
+    "language": "English"
+}

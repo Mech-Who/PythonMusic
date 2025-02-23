@@ -26,19 +26,6 @@ class Note(StrEnum):
     n6 = "A"
     n7 = "B"
 
-def str2note(mapping_dict, str_notes):
-    """
-    mapping_dict: {"your definition": "c1_1"}, every note will be used should be found in this dict. And the real note should be represent by 'cx_y', while 'x' means pitch, 'y' means name of the note in number.
-    str_notes: notes represent by str.
-    """
-    notes = str_notes.split()
-    final_notes = []
-    for note in notes:
-        final_notes.append(eval(mapping_dict[note]))
-    return final_notes
-
-rest = None
-
 # lowest
 c1_1 = mp.note(Note.n1, Pitch.LOWEST)
 c1_2 = mp.note(Note.n2, Pitch.LOWEST)
